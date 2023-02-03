@@ -1,25 +1,28 @@
-import { useParams, Outlet, useSearchParams } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { useParams, Outlet } from 'react-router-dom';
 import { getMovieDetails } from 'services/api';
+import { MovieInfo } from 'components/MovieInfo/MovieInfo';
 
 export const MovieDetails = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const { id } = useParams();
-  const movie = getMovieDetails(id);
+  const { movieId } = useParams();
+  const [movie, setMovie] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const movieDetails = await getMovieDetails(movieId);
+        setMovie(movieDetails);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchData();
+  }, [movieId]);
+
   return (
     <main>
-      <div>
-        <img src={movie.url} alt="" />
-        <div>
-          <h2>
-            Product - {movie.name} - {id}
-          </h2>
-          <p>User Score:</p>
-          <h3>Overview</h3>
-          <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
-          <h3>Geners</h3>
-          <p>Lorem ipsum dolor .</p>
-        </div>
-      </div>
+      {movie && <MovieInfo movie={movie} />}
       <div>
         <p>Additional information</p>
         <Outlet />

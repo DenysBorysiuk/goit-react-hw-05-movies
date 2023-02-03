@@ -9,8 +9,8 @@ export const getTrendingMovies = async () => {
   return response.data;
 };
 
-export const getMovieDetails = async id => {
-  const response = await axios.get(`https://pixabay.com/api/`);
+export const getMovieDetails = async movieId => {
+  const response = await axios.get(`/movie/${movieId}?api_key=${API_KEY}`);
   return response.data;
 };
 //   async getFilmsDetails() {

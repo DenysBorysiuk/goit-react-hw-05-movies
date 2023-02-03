@@ -6,7 +6,7 @@ export const MoviesList = ({ movies }) => {
     <List>
       {movies.map(({ id, poster_path, title }) => (
         <Item key={id}>
-          <Link to={`${id}`}>
+          <Link to={`/movies/${id}`}>
             <Thumb>
               <img
                 src={`https://image.tmdb.org/t/p/w500${poster_path}`}
