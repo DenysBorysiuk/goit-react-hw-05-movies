@@ -3,9 +3,12 @@ import { SharedLayout } from './SharedLayout/SharedLayout';
 import { Home } from 'pages/Home';
 import { Movies } from 'pages/Movies';
 import { MovieDetails } from 'pages/MovieDetails';
-import { Cast } from './Cast/Cast';
+// import { Cast } from './Cast/Cast';
 import { Reviews } from './Reviews/Reviews';
 // import { NotFound } from 'pages/NotFound';
+import { lazy } from 'react';
+
+const Cast = lazy(() => import('./Cast/Cast'));
 
 export const App = () => {
   return (

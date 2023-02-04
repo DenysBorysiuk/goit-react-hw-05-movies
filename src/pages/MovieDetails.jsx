@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useParams, Outlet } from 'react-router-dom';
+import { useParams, Link, Outlet } from 'react-router-dom';
 import { getMovieDetails } from 'services/api';
 import { MovieInfo } from 'components/MovieInfo/MovieInfo';
 
@@ -25,8 +25,16 @@ export const MovieDetails = () => {
       {movie && <MovieInfo movie={movie} />}
       <div>
         <p>Additional information</p>
-        <Outlet />
+        <ul>
+          <li>
+            <Link to="cast">Cast</Link>
+          </li>
+          <li>
+            <Link to="reviews">Reviews</Link>
+          </li>
+        </ul>
       </div>
+      <Outlet />
     </main>
   );
 };

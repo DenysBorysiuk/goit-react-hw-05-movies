@@ -6,7 +6,7 @@ export const Home = () => {
   const [movies, setMovies] = useState([]);
 
   useEffect(() => {
-    const getMovies = async () => {
+    const fetchData = async () => {
       try {
         const movies = await getTrendingMovies();
         setMovies(movies.results);
@@ -15,7 +15,7 @@ export const Home = () => {
       }
     };
 
-    getMovies();
+    fetchData();
   }, []);
 
   return (
