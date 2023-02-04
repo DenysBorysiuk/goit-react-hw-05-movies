@@ -1,5 +1,4 @@
 import { useState, useEffect } from 'react';
-// import { useSearchParams } from 'react-router-dom';
 import { useParams } from 'react-router-dom';
 import { getMovieCredits } from 'services/api';
 import { List, Item, Thumb } from './Cast.styled';

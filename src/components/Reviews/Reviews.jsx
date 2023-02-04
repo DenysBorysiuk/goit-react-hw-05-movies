@@ -1,4 +1,4 @@
-export const Reviews = () => {
+const Reviews = () => {
   return (
     <div>
       <p>We don`t have reviews for this movie</p>
@@ -10,3 +10,5 @@ export const Reviews = () => {
     </div>
   );
 };
+
+export default Reviews;

@@ -4,7 +4,7 @@ import { SearchBox } from 'components/SearchBox/SearchBox';
 import { MoviesList } from 'components/MoviesList/MoviesList';
 import { searchMovie } from 'services/api';
 
-export const Movies = () => {
+const Movies = () => {
   const [movies, setMovies] = useState([]);
   const [searchParams, setSearchParams] = useSearchParams();
   const query = searchParams.get('query') ?? '';
@@ -35,3 +35,5 @@ export const Movies = () => {
     </main>
   );
 };
+
+export default Movies;
