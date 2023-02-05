@@ -1,11 +1,13 @@
-import { useState, useEffect } from 'react';
-import { useParams, Link, Outlet } from 'react-router-dom';
+import { useState, useEffect, useRef } from 'react';
+import { useParams, Link, Outlet, useLocation } from 'react-router-dom';
 import { getMovieDetails } from 'services/api';
 import { MovieInfo } from 'components/MovieInfo/MovieInfo';
 
 const MovieDetails = () => {
   const { movieId } = useParams();
   const [movie, setMovie] = useState(null);
+  const location = useLocation();
+  const ref = useRef(location.state?.from ?? '/movies');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -22,6 +24,8 @@ const MovieDetails = () => {
 
   return (
     <main>
+      <Link to={ref.current}>&#8592; Go Back</Link>
+      {/* <Link to={location.state.from}>&#8592; Go Back</Link> */}
       {movie && <MovieInfo movie={movie} />}
       <div>
         <p>Additional information</p>

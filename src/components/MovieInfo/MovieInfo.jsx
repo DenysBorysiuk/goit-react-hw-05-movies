@@ -2,7 +2,6 @@ import { Wrapper } from './MovieInfo.styled';
 
 export const MovieInfo = ({ movie }) => (
   <div>
-    <button type="button">&#8592; Go Back</button>
     <Wrapper>
       <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} alt="" />
       <div>

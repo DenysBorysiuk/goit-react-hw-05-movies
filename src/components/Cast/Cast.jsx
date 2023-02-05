@@ -24,7 +24,6 @@ const Cast = () => {
   return (
     cast && (
       <List>
-        {console.log(cast)}
         {cast.map(({ cast_id, name, character, profile_path }) => (
           <Item key={cast_id}>
             <Thumb>
