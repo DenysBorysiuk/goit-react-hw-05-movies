@@ -1,4 +1,5 @@
 import { Link, useLocation } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { List, Item, Thumb } from './MovieList.styled';
 
 export const MoviesList = ({ movies }) => {
@@ -10,14 +11,27 @@ export const MoviesList = ({ movies }) => {
           <Link to={`/movies/${id}`} state={{ from: location }}>
             <Thumb>
               <img
-                src={`https://image.tmdb.org/t/p/w500${poster_path}`}
+                src={
+                  poster_path
+                    ? `https://image.tmdb.org/t/p/w500${poster_path}`
+                    : `https://via.placeholder.com/305x445.png?text=${title}`
+                }
                 alt={title}
               />
             </Thumb>
-            <p>{title}</p>
           </Link>
         </Item>
       ))}
     </List>
   );
+};
+
+MoviesList.propTypes = {
+  movies: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      poster_path: PropTypes.string,
+      title: PropTypes.string,
+    })
+  ),
 };

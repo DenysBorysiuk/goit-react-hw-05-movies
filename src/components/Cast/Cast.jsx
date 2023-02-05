@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { getMovieCredits } from 'services/api';
-import { List, Item, Thumb } from './Cast.styled';
+import { List, Item, Thumb, Name, Character } from './Cast.styled';
 
 const Cast = () => {
   const [cast, setCast] = useState(null);
@@ -28,12 +29,16 @@ const Cast = () => {
           <Item key={cast_id}>
             <Thumb>
               <img
-                src={`https://image.tmdb.org/t/p/w500${profile_path}`}
+                src={
+                  profile_path
+                    ? `https://image.tmdb.org/t/p/w500${profile_path}`
+                    : `https://via.placeholder.com/150x150.png?text=No+photo`
+                }
                 alt={name}
               />
             </Thumb>
-            <h2>{name}</h2>
-            <p>{character}</p>
+            <Name>{name}</Name>
+            <Character>{character}</Character>
           </Item>
         ))}
       </List>
@@ -42,3 +47,14 @@ const Cast = () => {
 };
 
 export default Cast;
+
+Cast.propTypes = {
+  reviews: PropTypes.arrayOf(
+    PropTypes.shape({
+      cast_id: PropTypes.string,
+      name: PropTypes.string,
+      character: PropTypes.string,
+      profile_path: PropTypes.string,
+    })
+  ),
+};

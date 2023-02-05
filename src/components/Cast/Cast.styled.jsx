@@ -7,17 +7,10 @@ export const List = styled.ul`
 `;
 
 export const Item = styled.li`
-  transition: transform 500ms;
-  will-change: transform;
-  cursor: pointer;
   border-radius: 5px;
   box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12), 0px 4px 4px rgba(0, 0, 0, 0.06),
     1px 4px 6px rgba(0, 0, 0, 0.16);
-
-  &:hover,
-  &:focus {
-    transform: scale(1.03);
-  }
+  text-align: center;
 `;
 
 export const Thumb = styled.div`
@@ -25,4 +18,12 @@ export const Thumb = styled.div`
   overflow: hidden;
   width: 150px;
   height: 150px;
+`;
+
+export const Name = styled.h2`
+  font-size: 12px;
+`;
+
+export const Character = styled.p`
+  font-size: 12px;
 `;

@@ -25,7 +25,6 @@ const MovieDetails = () => {
   return (
     <main>
       <Link to={ref.current}>&#8592; Go Back</Link>
-      {/* <Link to={location.state.from}>&#8592; Go Back</Link> */}
       {movie && <MovieInfo movie={movie} />}
       <div>
         <p>Additional information</p>
