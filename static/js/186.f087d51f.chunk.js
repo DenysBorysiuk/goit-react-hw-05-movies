@@ -1,2 +1,0 @@
-"use strict";(self.webpackChunkreact_homework_template=self.webpackChunkreact_homework_template||[]).push([[186],{186:function(e,r,i){i.r(r);var t=i(184);r.default=function(){return(0,t.jsxs)("div",{children:[(0,t.jsx)("p",{children:"We don`t have reviews for this movie"}),(0,t.jsxs)("div",{children:[(0,t.jsx)("h2",{children:"Author: Lorem"}),(0,t.jsx)("p",{children:"Lorem, ipsum dolor sit amet consectetur adipisicing elit"})]})]})}}}]);
-//# sourceMappingURL=186.f087d51f.chunk.js.map
