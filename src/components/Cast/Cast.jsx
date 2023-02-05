@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { getMovieCredits } from 'services/api';
-import { List, Item, Thumb, Name, Character } from './Cast.styled';
+import { List, Item, Thumb, Wrapper, Title, SubTitle } from './Cast.styled';
 
 const Cast = () => {
   const [cast, setCast] = useState(null);
@@ -37,8 +37,10 @@ const Cast = () => {
                 alt={name}
               />
             </Thumb>
-            <Name>{name}</Name>
-            <Character>{character}</Character>
+            <Wrapper>
+              <Title>{name}</Title>
+              <SubTitle>{character}</SubTitle>
+            </Wrapper>
           </Item>
         ))}
       </List>

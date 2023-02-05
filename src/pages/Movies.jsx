@@ -24,8 +24,9 @@ const Movies = () => {
     fetchData();
   }, [query]);
 
-  const updateQueryString = queryString => {
-    setSearchParams({ query: queryString });
+  const updateQueryString = query => {
+    const nextParams = query !== '' ? { query } : {};
+    setSearchParams(nextParams);
   };
 
   return (
