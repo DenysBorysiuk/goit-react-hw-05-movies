@@ -11,17 +11,23 @@ const Movies = () => {
 
   useEffect(() => {
     if (query === '') return;
-
+    const controller = new AbortController();
+    const signal = controller.signal;
     const fetchData = async () => {
       try {
-        const movies = await searchMovie(query);
+        const movies = await searchMovie(query, signal);
         setMovies(movies.results);
       } catch (error) {
+        if (error.name === 'CanceledError') return;
         console.log(error);
       }
     };
 
     fetchData();
+
+    return () => {
+      controller.abort();
+    };
   }, [query]);
 
   const updateQueryString = query => {

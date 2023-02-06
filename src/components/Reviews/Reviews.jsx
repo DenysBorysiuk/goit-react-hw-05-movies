@@ -3,24 +3,29 @@ import { useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { getMovieReviews } from 'services/api';
 
-// import { List, Item, Thumb } from './Cast.styled';
-
 const Reviews = () => {
   const [reviews, setReviews] = useState(null);
   const { movieId } = useParams();
 
   useEffect(() => {
     if (!movieId) return;
+    const controller = new AbortController();
+    const signal = controller.signal;
     const fetchData = async () => {
       try {
-        const movieReviews = await getMovieReviews(movieId);
+        const movieReviews = await getMovieReviews(movieId, signal);
         setReviews(movieReviews.results);
       } catch (error) {
+        if (error.name === 'CanceledError') return;
         console.log(error);
       }
     };
 
     fetchData();
+
+    return () => {
+      controller.abort();
+    };
   }, [movieId]);
 
   return reviews?.length > 0 ? (

@@ -14,7 +14,7 @@ export const MoviesList = ({ movies }) => {
                 src={
                   poster_path
                     ? `https://image.tmdb.org/t/p/w500${poster_path}`
-                    : `https://via.placeholder.com/305x445.png?text=${title}`
+                    : `https://via.placeholder.com/300x450.png?text=${title}`
                 }
                 alt={title}
               />

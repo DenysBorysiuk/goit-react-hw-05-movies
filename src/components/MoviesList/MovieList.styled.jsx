@@ -5,6 +5,7 @@ export const List = styled.ul`
   justify-content: center;
   flex-wrap: wrap;
   gap: 20px;
+  margin-top: 20px;
 `;
 
 export const Item = styled.li`
@@ -24,6 +25,6 @@ export const Item = styled.li`
 export const Thumb = styled.div`
   border-radius: 5px;
   overflow: hidden;
-  width: 305px;
-  height: 445px;
+  width: 300px;
+  height: 450px;
 `;

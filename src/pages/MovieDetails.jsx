@@ -1,7 +1,8 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, Suspense } from 'react';
 import { useParams, Link, Outlet, useLocation } from 'react-router-dom';
 import { getMovieDetails } from 'services/api';
 import { MovieInfo } from 'components/MovieInfo/MovieInfo';
+import { BackLink } from 'components/BackLink/BackLink';
 
 const MovieDetails = () => {
   const { movieId } = useParams();
@@ -10,21 +11,29 @@ const MovieDetails = () => {
   const ref = useRef(location.state?.from ?? '/movies');
 
   useEffect(() => {
+    const controller = new AbortController();
+    const signal = controller.signal;
     const fetchData = async () => {
       try {
-        const movieDetails = await getMovieDetails(movieId);
+        const movieDetails = await getMovieDetails(movieId, signal);
         setMovie(movieDetails);
       } catch (error) {
+        if (error.name === 'CanceledError') return;
         console.log(error);
       }
     };
 
     fetchData();
+
+    return () => {
+      controller.abort();
+    };
   }, [movieId]);
 
   return (
     <main>
-      <Link to={ref.current}>&#8592; Go Back</Link>
+      <BackLink to={ref.current}>Back to products</BackLink>
+      {/* <Link to={ref.current}>&#8592; Go Back</Link> */}
       {movie && <MovieInfo movie={movie} />}
       <div>
         <p>Additional information</p>
@@ -37,7 +46,9 @@ const MovieDetails = () => {
           </li>
         </ul>
       </div>
-      <Outlet />
+      <Suspense fallback={<div>Loading...</div>}>
+        <Outlet />
+      </Suspense>
     </main>
   );
 };
