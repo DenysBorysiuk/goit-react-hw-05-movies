@@ -25,12 +25,8 @@ export const getMovieDetails = async (movieId, signal) => {
 
 export const searchMovie = async (query, signal) => {
   const response = await axios.get(
-    `http://api.themoviedb.org/3/search/movie/`,
+    `http://api.themoviedb.org/3/search/movie/?api_key=${API_KEY}&query=${query}`,
     {
-      params: {
-        api_key: API_KEY,
-        query,
-      },
       signal,
     }
   );
