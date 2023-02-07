@@ -3,6 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 import { SearchBox } from 'components/SearchBox/SearchBox';
 import { MoviesList } from 'components/MoviesList/MoviesList';
 import { searchMovie } from 'services/api';
+import toast, { Toaster } from 'react-hot-toast';
 
 const Movies = () => {
   const [movies, setMovies] = useState([]);
@@ -16,10 +17,14 @@ const Movies = () => {
     const fetchData = async () => {
       try {
         const movies = await searchMovie(query, signal);
+        if (!movies.total_results) {
+          return toast.error('Enter correct query');
+        }
+
         setMovies(movies.results);
       } catch (error) {
         if (error.name === 'CanceledError') return;
-        console.log(error);
+        toast.error('Oops, something went wrong');
       }
     };
 
@@ -37,6 +42,7 @@ const Movies = () => {
 
   return (
     <main>
+      <Toaster position="top-right" reverseOrder={false} />
       <SearchBox updateQueryString={updateQueryString} />
       <MoviesList movies={movies} />
     </main>

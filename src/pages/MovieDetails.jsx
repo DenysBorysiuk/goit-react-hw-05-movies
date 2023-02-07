@@ -1,8 +1,9 @@
 import { useState, useEffect, useRef, Suspense } from 'react';
-import { useParams, Link, Outlet, useLocation } from 'react-router-dom';
+import { useParams, Outlet, useLocation } from 'react-router-dom';
 import { getMovieDetails } from 'services/api';
 import { MovieInfo } from 'components/MovieInfo/MovieInfo';
 import { BackLink } from 'components/BackLink/BackLink';
+import toast, { Toaster } from 'react-hot-toast';
 
 const MovieDetails = () => {
   const { movieId } = useParams();
@@ -19,7 +20,7 @@ const MovieDetails = () => {
         setMovie(movieDetails);
       } catch (error) {
         if (error.name === 'CanceledError') return;
-        console.log(error);
+        toast.error('Oops, something went wrong');
       }
     };
 
@@ -32,20 +33,9 @@ const MovieDetails = () => {
 
   return (
     <main>
+      <Toaster position="top-right" reverseOrder={false} />
       <BackLink to={ref.current}>Back to products</BackLink>
-      {/* <Link to={ref.current}>&#8592; Go Back</Link> */}
       {movie && <MovieInfo movie={movie} />}
-      <div>
-        <p>Additional information</p>
-        <ul>
-          <li>
-            <Link to="cast">Cast</Link>
-          </li>
-          <li>
-            <Link to="reviews">Reviews</Link>
-          </li>
-        </ul>
-      </div>
       <Suspense fallback={<div>Loading...</div>}>
         <Outlet />
       </Suspense>

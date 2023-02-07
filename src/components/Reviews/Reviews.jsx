@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { getMovieReviews } from 'services/api';
+import toast, { Toaster } from 'react-hot-toast';
+import { Title, Review, Nickname } from './Reviews.styled';
 
 const Reviews = () => {
   const [reviews, setReviews] = useState(null);
@@ -17,7 +19,7 @@ const Reviews = () => {
         setReviews(movieReviews.results);
       } catch (error) {
         if (error.name === 'CanceledError') return;
-        console.log(error);
+        toast.error('Oops, something went wrong');
       }
     };
 
@@ -29,14 +31,19 @@ const Reviews = () => {
   }, [movieId]);
 
   return reviews?.length > 0 ? (
-    <ul>
-      {reviews.map(({ id, author, content }) => (
-        <li key={id}>
-          <h2>Author: {author}</h2>
-          <p>{content}</p>
-        </li>
-      ))}
-    </ul>
+    <>
+      <Toaster position="top-right" reverseOrder={false} />
+      <ul>
+        {reviews.map(({ id, author, content }) => (
+          <li key={id}>
+            <Title>
+              Author: <Nickname>{author}</Nickname>
+            </Title>
+            <Review>{content}</Review>
+          </li>
+        ))}
+      </ul>
+    </>
   ) : (
     <p>We don`t have reviews for this movie</p>
   );
