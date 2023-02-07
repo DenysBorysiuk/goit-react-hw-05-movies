@@ -25,7 +25,7 @@ export const getMovieDetails = async (movieId, signal) => {
 
 export const searchMovie = async (query, signal) => {
   const response = await axios.get(
-    `${BASE_URL}/search/movie/?api_key=${API_KEY}&query=${query}`,
+    `${BASE_URL}/search/movie?api_key=${API_KEY}&query=${query}`,
     {
       signal,
     }
