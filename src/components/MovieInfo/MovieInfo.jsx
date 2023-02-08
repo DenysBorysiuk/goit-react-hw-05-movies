@@ -13,7 +13,14 @@ export const MovieInfo = ({
 }) => (
   <Wrapper>
     <Thumb>
-      <img src={`https://image.tmdb.org/t/p/w500${poster_path}`} alt="" />
+      <img
+        src={
+          poster_path
+            ? `https://image.tmdb.org/t/p/w500${poster_path}`
+            : `https://via.placeholder.com/400x550.png?text=${original_title}`
+        }
+        alt={original_title}
+      />
     </Thumb>
     <InfoWrapper>
       <h2>
@@ -40,10 +47,10 @@ export const MovieInfo = ({
 );
 
 MovieInfo.propTypes = {
-  movies: PropTypes.shape({
+  movie: PropTypes.shape({
     poster_path: PropTypes.string,
     original_title: PropTypes.string,
-    vote_average: PropTypes.string,
+    vote_average: PropTypes.number,
     overview: PropTypes.string,
     genres: PropTypes.array,
     release_date: PropTypes.string,

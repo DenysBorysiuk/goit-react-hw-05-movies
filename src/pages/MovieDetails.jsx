@@ -9,7 +9,7 @@ const MovieDetails = () => {
   const { movieId } = useParams();
   const [movie, setMovie] = useState(null);
   const location = useLocation();
-  const ref = useRef(location.state?.from ?? '/movies');
+  const ref = useRef(location.state?.from ?? '/');
 
   useEffect(() => {
     const controller = new AbortController();
